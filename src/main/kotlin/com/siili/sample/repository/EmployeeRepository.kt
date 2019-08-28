@@ -2,7 +2,7 @@ package com.siili.sample.repository
 
 import arrow.Kind
 import arrow.effects.rx2.ForSingleK
-import arrow.effects.rx2.SingleKOf
+import arrow.effects.rx2.SingleK
 import arrow.effects.rx2.k
 import arrow.effects.typeclasses.Async
 import com.siili.sample.domain.Employee
@@ -31,7 +31,7 @@ class AsyncEmployeeRepository<F>(
 class SingleKEmployeeRepository(
         private val reactiveStore: KotlinReactiveEntityStore<Persistable>): EmployeeRepository<ForSingleK> {
 
-    override fun findAll(): SingleKOf<List<Employee>> = reactiveStore
+    override fun findAll(): SingleK<List<Employee>> = reactiveStore
             .select(Employee::class)
             .get()
             .flowable()

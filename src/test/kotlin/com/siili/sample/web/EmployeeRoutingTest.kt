@@ -25,7 +25,7 @@ import java.nio.charset.StandardCharsets.UTF_8
 object EmployeeRoutingSpec: Spek({
 
     class MockEmployeeRepository(private val list: List<Employee>): EmployeeRepository<ForId> {
-        override fun findAll(): IdOf<List<Employee>> = Id.just(list)
+        override fun findAll(): Id<List<Employee>> = Id.just(list)
     }
 
     val employees = listOf(Employee(1, "John", "Smith"))

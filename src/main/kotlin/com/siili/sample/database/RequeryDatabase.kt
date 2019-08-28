@@ -1,6 +1,6 @@
 package com.siili.sample.database
 
-import com.siili.Models
+import com.siili.sample.domain.Models
 import io.requery.Persistable
 import io.requery.reactivex.KotlinReactiveEntityStore
 import io.requery.sql.KotlinConfiguration
