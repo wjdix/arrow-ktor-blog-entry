@@ -1,14 +1,14 @@
 package com.siili.sample
 
-import arrow.effects.ForIO
-import arrow.effects.IO
-import arrow.effects.extensions.io.async.async
-import arrow.effects.rx2.ForSingleK
-import arrow.effects.rx2.SingleK
+import arrow.fx.ForIO
+import arrow.fx.rx2.SingleK
+import arrow.fx.rx2.ForSingleK
+import arrow.fx.IO
+import arrow.fx.extensions.io.monadDefer.monadDefer
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.siili.sample.core.suspendable
 import com.siili.sample.database.RequeryDatabase
-import com.siili.sample.repository.AsyncEmployeeRepository
+import com.siili.sample.repository.DeferEmployeeRepository
 import com.siili.sample.repository.EmployeeRepository
 import com.siili.sample.repository.SingleKEmployeeRepository
 import com.siili.sample.web.EmployeeRouting
@@ -19,9 +19,9 @@ import io.ktor.routing.Routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 
-fun main(args: Array<String>) {
+fun main() {
 
-    val ioRepository: EmployeeRepository<ForIO> = AsyncEmployeeRepository(RequeryDatabase.store, IO.async())
+    val ioRepository: EmployeeRepository<ForIO> = DeferEmployeeRepository(RequeryDatabase.store, IO.monadDefer())
     val rx2Repository: EmployeeRepository<ForSingleK> = SingleKEmployeeRepository(RequeryDatabase.reactiveStore)
 
     val ioRouting = EmployeeRouting(ioRepository, IO.suspendable())

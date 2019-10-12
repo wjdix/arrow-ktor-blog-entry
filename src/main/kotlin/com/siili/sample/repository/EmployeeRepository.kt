@@ -1,10 +1,10 @@
 package com.siili.sample.repository
 
 import arrow.Kind
-import arrow.effects.rx2.ForSingleK
-import arrow.effects.rx2.SingleK
-import arrow.effects.rx2.k
-import arrow.effects.typeclasses.Async
+import arrow.fx.rx2.ForSingleK
+import arrow.fx.rx2.SingleK
+import arrow.fx.rx2.k
+import arrow.fx.typeclasses.MonadDefer
 import com.siili.sample.domain.Employee
 import io.requery.Persistable
 import io.requery.reactivex.KotlinReactiveEntityStore
@@ -14,11 +14,11 @@ interface EmployeeRepository<F> {
     fun findAll(): Kind<F, List<Employee>>
 }
 
-class AsyncEmployeeRepository<F>(
+class DeferEmployeeRepository<F>(
         private val store: KotlinEntityDataStore<Persistable>,
-        private val async: Async<F>): EmployeeRepository<F> {
+        private val monadDefer: MonadDefer<F>): EmployeeRepository<F> {
 
-    override fun findAll(): Kind<F, List<Employee>> = async.delay {
+    override fun findAll(): Kind<F, List<Employee>> = monadDefer.later {
         store.invoke {
             select(Employee::class)
                 .get()

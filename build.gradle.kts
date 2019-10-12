@@ -19,7 +19,7 @@ repositories {
 }
 
 val ktorVersion  = "1.2.3"
-val arrowVersion = "0.9.0"
+val arrowVersion = "0.10.0"
 val requeryVersion = "1.6.0"
 
 val logbackVersion = "1.2.3"
@@ -39,13 +39,9 @@ dependencies {
     implementation("io.ktor:ktor-jackson:$ktorVersion")
 
     // Arrow
-    implementation("io.arrow-kt:arrow-core-data:$arrowVersion")
-    implementation("io.arrow-kt:arrow-core-extensions:$arrowVersion")
-    implementation("io.arrow-kt:arrow-effects-data:$arrowVersion")
-    implementation("io.arrow-kt:arrow-effects-extensions:$arrowVersion")
-    implementation("io.arrow-kt:arrow-effects-rx2-data:$arrowVersion")
-    implementation("io.arrow-kt:arrow-effects-rx2-extensions:$arrowVersion")
-    implementation("io.arrow-kt:arrow-typeclasses:$arrowVersion")
+    implementation("io.arrow-kt:arrow-fx:$arrowVersion")
+    implementation("io.arrow-kt:arrow-fx-rx2:$arrowVersion")
+    implementation("io.arrow-kt:arrow-syntax:$arrowVersion")
 
     // Requery
     implementation( "io.requery:requery:$requeryVersion")
